@@ -1,0 +1,47 @@
+.register-container {
+  width: 650px;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+}
+
+.register-container > * {
+  margin-top: 50px;
+  align-self: center;
+}
+.register-container > input {
+  width: 350px;
+}
+.register-container > button {
+  outline: none;
+  border: none;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  width: 150px;
+  height: 42px;
+  font-size: 16px;
+}
+.register-container > button:hover {
+  background-color: rgb(80, 80, 80);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.register-container > .register-header {
+  width: 310px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.register-header > .arrow-left {
+  font-size: 32px;
+  margin-top: 31px;
+}
+
+.register-header > .arrow-left:hover {
+  cursor: pointer;
+  background-color: rgb(195, 195, 195);
+}

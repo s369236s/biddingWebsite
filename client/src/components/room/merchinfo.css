@@ -1,0 +1,50 @@
+.room-merch-info-container {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+}
+.room-merch-info-container > * {
+  /* align-self: center; */
+}
+.room-merch-text-info {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-left: 50px;
+}
+.room-merch-text-info > .info-name {
+  font-size: 20px;
+  color: rgb(83, 82, 82);
+  border-top: 1px rgb(206, 206, 206) solid;
+}
+.room-merch-text-info > .info {
+  font-size: 20px;
+  color: rgb(83, 82, 82);
+  border-top: 1px rgb(206, 206, 206) solid;
+}
+
+.room-merch-text-info > .merchName {
+  text-align: center;
+  font-size: 33px;
+  margin: 10px;
+}
+.room-merch-text-info > .sellerName {
+  text-align: center;
+  font-size: 25px;
+  margin: 5px;
+}
+
+.room-merch-text-info > .detail {
+  font-size: 20px;
+  display: inline;
+  padding-left: 25px;
+  padding-right: 25px;
+
+  word-break: break-all;
+}
+
+.room-merch-info-container > img {
+  width: 250px;
+  height: 250px;
+  align-self: baseline;
+}

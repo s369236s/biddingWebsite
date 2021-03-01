@@ -1,0 +1,18 @@
+* {
+  font-family: "Open Sans Condensed";
+  font-weight: 600;
+}
+
+body {
+  font-family: "Open Sans Condensed", sans-serif;
+  background-color: rgb(241, 241, 241);
+}
+
+input {
+  outline: none;
+  border: none;
+  border-bottom: 2px rgb(219, 219, 219) solid;
+  height: 36px;
+  font-size: 18px;
+  padding-left: 15px;
+}

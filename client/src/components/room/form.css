@@ -1,0 +1,37 @@
+.room-form-container {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.room-form-container > input {
+  margin-top: 50px;
+  width: 250px;
+  border: 1px rgb(206, 206, 206) solid;
+  border-radius: 5px;
+}
+.room-form-container > * {
+  align-self: center;
+}
+
+.room-form-container > div {
+  margin-top: 15px;
+}
+
+.room-form-container > button {
+  outline: none;
+  border: none;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  width: 150px;
+  height: 42px;
+  font-size: 16px;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.room-form-container > button:hover {
+  background-color: rgb(80, 80, 80);
+  transition: all 0.2s;
+  cursor: pointer;
+}

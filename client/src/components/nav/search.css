@@ -1,0 +1,32 @@
+.search-input {
+  position: relative;
+  outline: none;
+  border: none;
+  width: 450px;
+  border-bottom: 2px rgb(219, 219, 219) solid;
+  height: 36px;
+  font-size: 18px;
+  padding-left: 15px;
+  margin-top: 8px;
+}
+.search-bar-container {
+  display: flex;
+  color: black;
+  justify-content: flex-end;
+}
+.search-icon-container {
+  position: absolute;
+  width: 30px;
+  justify-content: flex-end;
+  display: flex;
+  height: 25px;
+  border-left: 1px rgb(206, 206, 206) solid;
+  margin-top: 15px;
+}
+.search-icon-container > a {
+  margin-right: 8px;
+  color: rgb(84, 84, 248);
+}
+.search-icon {
+  font-size: 16px;
+}

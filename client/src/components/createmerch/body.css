@@ -1,0 +1,98 @@
+.createMerch-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.createMerch-container > h1 {
+  align-self: center;
+}
+.createMerch-info {
+  margin-top: 50px;
+  align-self: center;
+  display: flex;
+}
+.createMerch-info > p {
+  margin-left: 15px;
+  margin: 5px;
+}
+.createMerch-input {
+  width: 500px;
+  border: 1px rgb(206, 206, 206) solid;
+  border-radius: 5px;
+}
+
+.merch-detail {
+  width: 569px;
+  border-radius: 5px;
+  display: flex;
+}
+.merch-detail > textarea {
+  height: 200px;
+  font-size: 30px;
+}
+
+.merch-image {
+  width: 569px;
+  height: 100px;
+  border-radius: 5px;
+  display: flex;
+}
+.merch-image > p {
+  align-self: center;
+}
+.createMerch-image-input {
+  width: 500px;
+  border-radius: 5px;
+}
+.create-preview-container {
+  display: flex;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-left: 50px;
+  border: 1px rgb(199, 199, 199) solid;
+  justify-content: center;
+}
+.create-preview-container > * {
+  align-self: center;
+  position: absolute;
+  cursor: default;
+}
+.create-preview {
+  position: absolute;
+}
+.createMerch-upload-input {
+  align-self: center;
+  margin-left: 50px;
+  width: 60px;
+  height: 60px;
+  border: 1px rgb(0, 132, 255) dashed;
+  justify-content: center;
+  display: flex;
+  border-radius: 5 px;
+  cursor: pointer;
+}
+.createMerch-upload-input > svg {
+  color: rgb(0, 132, 255);
+  font-weight: 0;
+  align-self: center;
+  font-size: 25px;
+}
+.createMerch-button {
+  outline: none;
+  border: none;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  width: 150px;
+  height: 42px;
+  font-size: 16px;
+  align-self: center;
+  margin-top: 40px;
+}
+
+.createMerch-button:hover {
+  background-color: rgb(80, 80, 80);
+  transition: all 0.2s;
+  cursor: pointer;
+}
