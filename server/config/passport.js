@@ -29,6 +29,7 @@ module.exports = function (passport) {
         username: user.username,
         email: user.email,
         id: user._id,
+        usersNumber: user.userNumber,
       };
       done(err, userInformation);
     });

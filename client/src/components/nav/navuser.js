@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import "./navuser.css";
-const NavUser = ({ isOver, setOver, overEvent, leaveEvent, history }) => {
+const NavUser = ({ isOver, userLink, overEvent, leaveEvent, history }) => {
   const handleLogOut = async () => {
     await Axios.get("http://localhost:5000/user/logout", {
       withCredentials: true,
@@ -18,7 +18,7 @@ const NavUser = ({ isOver, setOver, overEvent, leaveEvent, history }) => {
       onMouseLeave={leaveEvent}
     >
       <div className="nav-user-o-container">
-        <Link to="/user">我的帳戶</Link>
+        <Link to={`/user?user=${userLink}`}>我的帳戶</Link>
         <Link to="/createnewmerch" className="not-first">
           新增商品
         </Link>

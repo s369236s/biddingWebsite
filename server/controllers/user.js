@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const { validationResult } = require("express-validator");
 const passport = require("passport");
 const User = require("../models/User");
@@ -19,11 +20,23 @@ module.exports = {
           res.send(alerts);
         }
         if (!user) {
+          let usersId = crypto.randomBytes(10).toString("hex");
+          let userIdIsRepeated = true;
+          while (!userIdIsRepeated) {
+            User.findOne({ userNumber: usersId }),
+              (err, user) => {
+                if (!user) {
+                  userIdIsRepeated = false;
+                }
+              };
+            usersId = crypto.randomBytes(10).toString("hex");
+          }
           const hashedPassword = await bcrypt.hash(password, 10);
           const Newuser = new User({
             email: email,
             username: username,
             password: hashedPassword,
+            userNumber: usersId,
           });
           await Newuser.save();
           res.send("create a new account");
@@ -57,5 +70,9 @@ module.exports = {
   },
   auth: (req, res, next) => {
     ensureAuthenticated(req, res, next);
+  },
+  getCheckUser: (req, res) => {
+    console.log(req.query.gay);
+    res.send(req.query.gay);
   },
 };

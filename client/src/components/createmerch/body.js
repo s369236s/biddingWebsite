@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { PlusCircle } from "react-bootstrap-icons";
+import Cropper from "react-cropper";
+import CreateImageCrop from "./crop";
 import Axios from "axios";
+import Popup from "reactjs-popup";
+// import "reactjs-popup/dist/index.css";
 import "./body.css";
+
 const CreateMerchBody = () => {
   let history = useHistory();
   const [name, setMerchName] = useState("");
@@ -11,10 +16,14 @@ const CreateMerchBody = () => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [detail, setDetail] = useState("");
+  let [errors, setErrors] = useState([]);
   let [preview, setPreview] = useState("");
+  let [cropResult, setCropResult] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOnChange = (e) => {
     setFile(e.target.files[0]);
+    console.log(e.target.files[0]);
     setPreview(URL.createObjectURL(e.target.files[0]));
     setWidth(100);
     setHeight(100);
@@ -23,13 +32,45 @@ const CreateMerchBody = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
+    // formData.append("merchImg", file);
+
     formData.append("merchImg", file);
     formData.append("name", name);
     formData.append("price", price);
     formData.append("detail", detail);
     Axios.post("http://localhost:5000/merch/createNewMerch", formData, {
       withCredentials: true,
-    }).then((res) => history.push("/home"));
+    })
+      .then((res) => {
+        set(res.data, log);
+        history.push("/home");
+        console.log(res.data);
+      })
+      .catch((err) => {
+        history.push("/home");
+      });
+  };
+
+  const set = (data, cb) => {
+    data = data.map((error) => {
+      console.log(error.msg);
+    });
+    cb();
+  };
+  const log = () => {
+    console.log(errors);
+  };
+  const cropperRef = useRef(null);
+  const imageElement = cropperRef?.current;
+  const cropper = imageElement?.cropper;
+  const onCrop = () => {
+    if (preview !== "") {
+      setCropResult(cropper.getCroppedCanvas().toDataURL());
+      cropper.getCroppedCanvas().toBlob((blob) => {
+        setFile(blob);
+      });
+    }
+    setPreview("");
   };
 
   return (
@@ -50,12 +91,13 @@ const CreateMerchBody = () => {
       <div className="createMerch-info merch-detail">
         <p>描述</p>
         <textarea
+          maxLength="100"
           name="detail"
           value={detail}
           onChange={(e) => {
             setDetail(e.target.value);
           }}
-          className="createMerch-input"
+          className="createMerch-textarea"
         />
       </div>
       <div className="createMerch-info merch-price">
@@ -73,7 +115,51 @@ const CreateMerchBody = () => {
       <div className="createMerch-info merch-image">
         <p>封面圖片</p>
 
-        <label className="createMerch-upload-input">
+        <Popup
+          open={isOpen}
+          trigger={
+            <button className="createMerch-upload-input">
+              <PlusCircle />
+            </button>
+          }
+          closeOnDocumentClick={false}
+          className="createMerch-popup"
+          position="center center"
+          modal
+          nested
+        >
+          {(close) => (
+            <div className="createMerch-popup-container">
+              <div className="createMerch-button-container">
+                <label className="createMerch-upload-input-pop">
+                  <input
+                    style={{ display: "none" }}
+                    onChange={handleOnChange}
+                    type="file"
+                    name="merchImg"
+                  />
+                  <PlusCircle />
+                </label>
+                <button
+                  className="createMerch-pop-button"
+                  onClick={() => {
+                    onCrop();
+                    close();
+                  }}
+                >
+                  裁剪
+                </button>
+              </div>
+              <CreateImageCrop
+                cropperRef={cropperRef}
+                preview={preview}
+                onCrop={onCrop}
+              />
+            </div>
+          )}
+        </Popup>
+
+        {/* <label className="createMerch-upload-input">
           <input
             style={{ display: "none" }}
             onChange={handleOnChange}
@@ -81,17 +167,18 @@ const CreateMerchBody = () => {
             name="merchImg"
           />
           <PlusCircle />
-        </label>
+        </label> */}
         <div className="create-preview-container">
           <p style={{ display: width === 100 ? "none" : "flex" }}>預覽</p>
           <img
             className="create-preview"
-            src={preview}
+            src={cropResult}
             width={width}
             height={height}
           />
         </div>
       </div>
+
       <button onClick={handleSubmit} className="createMerch-button">
         送出
       </button>

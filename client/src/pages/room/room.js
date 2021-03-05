@@ -37,7 +37,7 @@ const RoomPage = ({ location }) => {
       setImage(result.data.photo);
       setPrice(result.data.price);
       setDetail(result.data.detail);
-      setSellerName(result.data.sellerId);
+      setSellerName(result.data.sellerName);
       console.log(result);
     }
     socket.emit("join", room.room);

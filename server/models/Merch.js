@@ -15,7 +15,11 @@ const MerchSchema = new mongoose.Schema({
   },
   sellerId: {
     type: String,
-    required: false,
+    required: true,
+  },
+  sellerName: {
+    type: String,
+    required: true,
   },
   biddingTime: {
     type: String,

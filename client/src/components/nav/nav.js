@@ -7,6 +7,8 @@ import Axios from "axios";
 const Nav = ({ setMerchs }) => {
   let history = useHistory();
   const [username, setUsername] = useState("");
+  const [userLink, setUserLink] = useState("");
+
   const [over, setOver] = useState(false);
   const leaveEvent = (e) => {
     setOver(false);
@@ -21,11 +23,12 @@ const Nav = ({ setMerchs }) => {
       url: "http://localhost:5000/user/auth",
     }).then((res) => {
       if (res.data === "Please log in") {
-        history.push("/");
+        // history.push("/");
       } else {
         // console.log(res.data);
       }
       setUsername(res.data.username);
+      setUserLink(res.data.usersNumber);
     });
   }, [username]);
   return (
@@ -45,6 +48,7 @@ const Nav = ({ setMerchs }) => {
           leaveEvent={leaveEvent}
           overEvent={overEvent}
           history={history}
+          userLink={userLink}
         />
       </div>
       <div className="nav-with-search">

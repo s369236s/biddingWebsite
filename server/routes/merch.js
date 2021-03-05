@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { check } = require("express-validator");
+
 const { multer, upload, fileFilter, stroage } = require("../config/upload");
 const {
   postCreateNewMerch,
@@ -8,12 +10,18 @@ const {
   addBidMoney,
 } = require("../controllers/merch");
 
-router.post("/createNewMerch", upload.single("merchImg"), (req, res) => {
-  postCreateNewMerch(req, res);
-  // console.log(req.file.filename);
-
-  res.send("?_?");
-});
+router.post(
+  "/createNewMerch",
+  upload.single("merchImg"),
+  [
+    check("name", "type of name is wrong").notEmpty().isLength({ max: 10 }),
+    check("price", "price must be number").isNumeric(),
+  ],
+  (req, res) => {
+    postCreateNewMerch(req, res);
+    // console.log(req.file.filename);
+  }
+);
 router.get("/getMerch", (req, res) => {
   getMerch(req, res);
 });

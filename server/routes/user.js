@@ -1,7 +1,12 @@
 const express = require("express");
 const { check } = require("express-validator");
 const router = express.Router();
-const { postRegister, postLogin, auth } = require("../controllers/user");
+const {
+  postRegister,
+  postLogin,
+  auth,
+  getCheckUser,
+} = require("../controllers/user");
 
 router.post(
   "/register",
@@ -40,6 +45,10 @@ router.get("/auth", (req, res) => {
   if (req.isAuthenticated()) {
     res.send(req.user);
   } else res.send("Please log in");
+});
+
+router.get("/checkUser", (req, res) => {
+  getCheckUser(req, res);
 });
 
 router.get("/logout", (req, res) => {

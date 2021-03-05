@@ -1,24 +1,33 @@
 const Merch = require("../models/Merch");
+const { validationResult } = require("express-validator");
 const { multer, upload, fileFilter, stroage } = require("../config/upload");
 
 module.exports = {
   postCreateNewMerch: async (req, res) => {
-    console.log(req.user);
-    console.log(req.file);
-    let file;
-    if (!req.file) file = "default.png";
-    else file = req.file.filename;
+    const errors = validationResult(req);
+    let alerts = [];
+    if (!errors.isEmpty() || req.user === undefined) {
+      alerts = errors.array();
+      if (req.user === undefined) alerts.push({ msg: "user error" });
+      res.send(alerts);
+    } else {
+      let file;
+      if (!req.file) file = "default.png";
+      else file = req.file.filename;
 
-    const merch = new Merch({
-      name: req.body.name,
-      price: req.body.price,
-      // biddingTime: req.body.biddingTime,
-      sellerId: req.user.username,
-      photo: file,
-      detail: req.body.detail,
-    });
-    console.log(merch);
-    await merch.save();
+      const merch = new Merch({
+        name: req.body.name,
+        price: req.body.price,
+        // biddingTime: req.body.biddingTime,
+        sellerName: req.user.username,
+        sellerId: req.user.id,
+        photo: file,
+        detail: req.body.detail,
+      });
+      console.log(merch);
+      await merch.save();
+      res.send("merch created");
+    }
   },
   getMerch: async (req, res) => {
     Merch.find({}, (err, datas) => {
