@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Flash from "./flash";
 import Axios from "axios";
 import "./form.css";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [flashs, setFlashs] = useState([]);
+  let value = 0;
   let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios({
+    const result = Axios({
       method: "post",
       url: "http://localhost:5000/user/login",
       data: {
@@ -23,7 +25,8 @@ const LoginForm = () => {
       if (res.data === "Successfully Authenticated") {
         history.push("/home");
       }
-      console.log(res.data);
+      setFlashs([...res.data]);
+      console.log(flashs);
     });
   };
   return (
@@ -43,6 +46,9 @@ const LoginForm = () => {
       />
       <button onClick={handleSubmit}>Sign-in</button>
       <Link to="register">Sign up</Link>
+      {flashs.map((flash) => (
+        <Flash key={value++} msg={flash.msg} />
+      ))}
     </form>
   );
 };

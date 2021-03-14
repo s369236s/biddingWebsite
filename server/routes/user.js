@@ -11,16 +11,12 @@ const {
 router.post(
   "/register",
   [
-    check("email", "This is not a standard email").isEmail(),
-    check("username", "Username has to be 6+ character long")
-      .notEmpty()
-      .isLength({ min: 1 }),
-    check("password", "Password has to be 6+ character long")
-      .notEmpty()
-      .isLength({ min: 6 }),
+    check("email", "這不是正確的信箱").isEmail(),
+    check("username", "用戶名稱至少6位以上").isLength({ min: 1 }),
+    check("password", "密碼必須6位以上").isLength({ min: 6 }),
     check("conPassword").custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error("not same with password");
+        throw new Error("重複密碼與密碼不同");
       }
       return true;
     }),
@@ -33,8 +29,8 @@ router.post(
 router.post(
   "/login",
   [
-    check("email", "This is not a standard email").isEmail(),
-    check("password", "Password can't not be empty").notEmpty(),
+    check("email", "請輸入標準信箱").isEmail(),
+    check("password", "請輸入密碼").notEmpty(),
   ],
   (req, res, next) => {
     postLogin(req, res, next);

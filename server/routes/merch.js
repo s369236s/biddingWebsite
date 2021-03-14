@@ -8,6 +8,7 @@ const {
   getMerch,
   getAMerch,
   addBidMoney,
+  getUserSellMerch,
 } = require("../controllers/merch");
 
 router.post(
@@ -22,8 +23,13 @@ router.post(
     // console.log(req.file.filename);
   }
 );
+
 router.get("/getMerch", (req, res) => {
   getMerch(req, res);
+});
+
+router.get("/getUserSellMerch", (req, res) => {
+  getUserSellMerch(req, res);
 });
 
 router.post("/getAMerch", (req, res) => {

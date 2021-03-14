@@ -1,4 +1,6 @@
 const Merch = require("../models/Merch");
+const User = require("../models/User");
+
 const { validationResult } = require("express-validator");
 const { multer, upload, fileFilter, stroage } = require("../config/upload");
 
@@ -24,6 +26,17 @@ module.exports = {
         photo: file,
         detail: req.body.detail,
       });
+      User.findByIdAndUpdate(
+        req.user.id,
+        {
+          $push: { sellMerchs: merch._id },
+        },
+        (err, _user) => {
+          if (err) throw err;
+          console.log(_user);
+        }
+      );
+
       console.log(merch);
       await merch.save();
       res.send("merch created");
@@ -41,6 +54,31 @@ module.exports = {
       res.send(...datas);
     });
   },
+  getUserSellMerch: async (req, res) => {
+    if (req.user) {
+      await User.find({ _id: req.user.id }, async (err, datas) => {
+        if (err) throw err;
+        let [a] = datas;
+        let merchs = [];
+        for (const sellMerch of a.sellMerchs) {
+          await Merch.find({ _id: sellMerch }, (err, merch) => {
+            if (err) throw err;
+            let [b] = merch;
+            if (b) {
+              merchs.push({
+                name: b.name,
+                price: b.price,
+                id: b._id,
+                photo: b.photo,
+              });
+            }
+          });
+        }
+        res.status(201).send(merchs);
+      });
+    }
+  },
+
   addBidMoney: async (bidNumber, merchId) => {
     // console.log(bidNumber);
     if (isNaN(bidNumber)) {

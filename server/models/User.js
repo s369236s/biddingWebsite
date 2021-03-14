@@ -18,6 +18,22 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  birthYear: {
+    type: String,
+    required: true,
+  },
+  birthMonth: {
+    type: String,
+    required: true,
+  },
+  birthDay: {
+    type: String,
+    required: true,
+  },
+  sellMerchs: {
+    type: Array,
+    required: false,
+  },
 });
 
 const User = mongoose.model("User", UserSchema, "users");

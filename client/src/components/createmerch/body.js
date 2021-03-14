@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { PlusCircle } from "react-bootstrap-icons";
-import Cropper from "react-cropper";
+import { PlusCircle, XSquare } from "react-bootstrap-icons";
 import CreateImageCrop from "./crop";
 import Axios from "axios";
 import Popup from "reactjs-popup";
@@ -19,7 +18,8 @@ const CreateMerchBody = () => {
   let [errors, setErrors] = useState([]);
   let [preview, setPreview] = useState("");
   let [cropResult, setCropResult] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [flashName, setFlashName] = useState(false);
+  const [flashPrice, setFlashPrice] = useState(false);
 
   const handleOnChange = (e) => {
     setFile(e.target.files[0]);
@@ -42,24 +42,24 @@ const CreateMerchBody = () => {
       withCredentials: true,
     })
       .then((res) => {
-        set(res.data, log);
-        history.push("/home");
-        console.log(res.data);
+        if (res.data === "merch created") history.push("/home");
+        else {
+          let results = res.data;
+          console.log(res.data);
+          results = results.map((foo) => foo.msg);
+
+          const name = (element) => element === "type of name is wrong";
+          const price = (element) => element === "price must be number";
+
+          if (results.some(name)) setFlashName(true);
+          else setFlashName(false);
+          if (results.some(price)) setFlashPrice(true);
+          else setFlashPrice(false);
+        }
       })
-      .catch((err) => {
-        history.push("/home");
-      });
+      .catch((res) => {});
   };
 
-  const set = (data, cb) => {
-    data = data.map((error) => {
-      console.log(error.msg);
-    });
-    cb();
-  };
-  const log = () => {
-    console.log(errors);
-  };
   const cropperRef = useRef(null);
   const imageElement = cropperRef?.current;
   const cropper = imageElement?.cropper;
@@ -87,6 +87,12 @@ const CreateMerchBody = () => {
           }}
           className="createMerch-input"
         />
+        <p
+          className="flash"
+          style={{ display: flashName === false ? "none" : "inline" }}
+        >
+          名稱不可為空白
+        </p>
       </div>
       <div className="createMerch-info merch-detail">
         <p>描述</p>
@@ -110,13 +116,18 @@ const CreateMerchBody = () => {
             setMerchPrice(e.target.value);
           }}
           className="createMerch-input"
-        />
+        />{" "}
+        <p
+          className="flash"
+          style={{ display: flashPrice === false ? "none" : "inline" }}
+        >
+          價格不得為空
+        </p>
       </div>
       <div className="createMerch-info merch-image">
         <p>封面圖片</p>
 
         <Popup
-          open={isOpen}
           trigger={
             <button className="createMerch-upload-input">
               <PlusCircle />
@@ -130,6 +141,12 @@ const CreateMerchBody = () => {
         >
           {(close) => (
             <div className="createMerch-popup-container">
+              <XSquare
+                className="Xicon"
+                onClick={() => {
+                  close();
+                }}
+              />
               <div className="createMerch-button-container">
                 <label className="createMerch-upload-input-pop">
                   <input

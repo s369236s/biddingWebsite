@@ -30,7 +30,7 @@ const Nav = ({ setMerchs }) => {
       setUsername(res.data.username);
       setUserLink(res.data.usersNumber);
     });
-  }, [username]);
+  }, []);
   return (
     <div className="nav-container">
       <div className="nav-without-search">

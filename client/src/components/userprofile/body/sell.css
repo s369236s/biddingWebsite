@@ -1,0 +1,7 @@
+.user-profile-sell-container {
+  width: 350px;
+}
+
+.user-profile-sell-container > .header {
+  border-bottom: 1px rgb(206, 206, 206) solid;
+}

@@ -12,6 +12,7 @@ const CreateImageCrop = ({ preview, onCrop, cropperRef }) => {
           height: 300,
           width: 300,
           alignSelf: "center",
+          background: "rgb(250, 250, 250)",
         }}
         ref={cropperRef}
         onCrop={onCrop}

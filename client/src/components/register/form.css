@@ -1,14 +1,20 @@
 .register-container {
   width: 650px;
-  height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: auto;
 }
-
+.register-container > .flash {
+  text-align: center;
+  margin-top: 25px;
+  border-radius: 5px;
+  background-color: rgb(255, 201, 201);
+  width: 300px;
+  font-size: 25px;
+}
 .register-container > * {
-  margin-top: 50px;
+  margin-top: 35px;
   align-self: center;
 }
 .register-container > input {
@@ -44,4 +50,30 @@
 .register-header > .arrow-left:hover {
   cursor: pointer;
   background-color: rgb(195, 195, 195);
+}
+
+.register-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 367px;
+}
+.register-input-container > p {
+  margin: 0;
+  color: rgb(83, 82, 82);
+  font-size: 16px;
+}
+.register-input-container > div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.register-input-container > div > select {
+  width: 110px;
+  padding: 3px;
+  height: 35px;
+  border-radius: 5px;
+  border-color: rgb(175, 175, 175);
+}
+.register-input-container > div > select:focus {
+  outline: none;
 }

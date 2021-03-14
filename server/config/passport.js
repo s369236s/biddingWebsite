@@ -7,13 +7,13 @@ module.exports = function (passport) {
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
       User.findOne({ email: email }, (err, user) => {
         if (err) throw err;
-        if (!user) return done(null, false, { msg: "No User Exists" });
+        if (!user) return done(null, false, { msg: "使用者不存在" });
         bcrypt.compare(password, user.password, (err, result) => {
           if (err) throw err;
           if (result === true) {
             return done(null, user);
           } else {
-            return done(null, false, { msg: "wrong password" });
+            return done(null, false, { msg: "密碼錯誤" });
           }
         });
       });

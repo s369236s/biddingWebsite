@@ -5,7 +5,7 @@ import LoginPage from "./pages/login/loginpage";
 import Register from "./pages/register/registerpage";
 import HomePage from "./pages/home/homepage";
 import Room from "./pages/room/room";
-import UserPage from "./pages/user/userPage";
+import UserProfilePage from "./pages/userprofile/userProfilePage";
 
 import CreateNewMerch from "./pages/cretemerch/createmerchpage";
 import "./App.css";
@@ -19,7 +19,7 @@ function App() {
         <Route path="/Home" component={HomePage} />
         <Route exact path="/CreateNewMerch" component={CreateNewMerch} />
         <Route exact path="/Room" component={Room} />
-        <Route exact path="/user" component={UserPage} />
+        <Route exact path="/user" component={UserProfilePage} />
       </Switch>
     </div>
   );

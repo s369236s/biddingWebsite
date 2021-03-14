@@ -1,0 +1,37 @@
+.user-profile-info-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  width: 350px;
+}
+.user-profile-info-container > .info-name {
+  display: flex;
+  color: rgb(83, 82, 82);
+  border-top: 1px rgb(206, 206, 206) solid;
+  justify-content: space-between;
+  font-size: 25px;
+}
+.user-profile-info-container > .info-name > p {
+  margin: 0px;
+}
+.user-profile-info-container > .edit {
+  align-self: flex-end;
+  margin: 0px;
+  font-size: 20px;
+  color: rgb(114, 114, 246);
+  cursor: pointer;
+}
+.user-profile-info-container > .info-name > .edit {
+  font-size: 20px;
+  color: rgb(114, 114, 246);
+  cursor: pointer;
+}
+.user-profile-info-container > .info-name > .edit:hover {
+  color: rgb(38, 38, 255);
+}
+.user-profile-info-container > p {
+  margin: 15px;
+}
+.user-profile-info-container > .info-email {
+  font-size: 25px;
+}
