@@ -45,6 +45,7 @@ io.on("connection", (socket) => {
       const MerchId = data.room;
       const parseBidmoney = parseInt(data.bidmoney);
       addBidMoney(parseBidmoney, MerchId).then((sucess) => {
+        console.log("su");
         let isUpdate = false;
         if (sucess) {
           isUpdate = true;

@@ -10,7 +10,6 @@ const Room = ({ location }) => {
   const [value, setValue] = useState("");
   const [id, setId] = useState(0);
   const room = qs.parse(location.search);
-  // console.log(useQuery());
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit("send", { value, room });
@@ -26,10 +25,6 @@ const Room = ({ location }) => {
       setId(data);
       console.log(data);
     });
-    // socket.on("join-room-message", (data) => {
-    //   console.log(data.value);
-    //   setId(data.value);
-    // });
   }, []);
 
   return (

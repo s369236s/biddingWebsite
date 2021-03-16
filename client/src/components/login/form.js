@@ -11,9 +11,9 @@ const LoginForm = () => {
   let value = 0;
   let history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = Axios({
+    await Axios({
       method: "post",
       url: "http://localhost:5000/user/login",
       data: {
@@ -26,7 +26,6 @@ const LoginForm = () => {
         history.push("/home");
       }
       setFlashs([...res.data]);
-      console.log(flashs);
     });
   };
   return (

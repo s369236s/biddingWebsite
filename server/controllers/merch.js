@@ -33,7 +33,7 @@ module.exports = {
         },
         (err, _user) => {
           if (err) throw err;
-          console.log(_user);
+          // console.log(_user);
         }
       );
 

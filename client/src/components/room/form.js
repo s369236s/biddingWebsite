@@ -20,13 +20,11 @@ const RoomForm = ({ socket, room, price }) => {
         setFlash("出價成功");
       }
     });
+    // return () => {
+    //   socket.off();
+    // };
   }, [flash]);
-  // useEffect(() => {
-  //   socket.on("update-merch-money", (data) => {
-  //     setMoney(data);
-  //     console.log();
-  //   });
-  // }, [socket]);
+
   return (
     <form className="room-form-container">
       <h1>價格 : ${price}</h1>
@@ -45,18 +43,6 @@ const RoomForm = ({ socket, room, price }) => {
       </div>
     </form>
   );
-
-  // const handleSubmit_ = async (e) => {
-  //   e.preventDefault();
-  //   const parseMoney = parseInt(money);
-  //   const result = await Axios.post("http://localhost:5000/merch/bidAMerch", {
-  //     parseMoney,
-  //   });
-  //   if (result.data === "error") {
-  //   } else {
-  //     console.log(result);
-  //   }
-  // };
 };
 
 export default RoomForm;

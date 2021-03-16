@@ -14,24 +14,51 @@
 .user-profile-info-container > .info-name > p {
   margin: 0px;
 }
-.user-profile-info-container > .edit {
-  align-self: flex-end;
+.user-profile-info-container > .editContainer > .edit {
   margin: 0px;
   font-size: 20px;
   color: rgb(114, 114, 246);
   cursor: pointer;
 }
-.user-profile-info-container > .info-name > .edit {
+
+.user-profile-info-container > .editContainer > .true {
+  margin: 0px;
   font-size: 20px;
-  color: rgb(114, 114, 246);
+  color: rgb(86, 175, 86);
+  cursor: pointer;
+  margin-right: 15px;
+}
+.user-profile-info-container > .editContainer > .false {
+  margin: 0px;
+  font-size: 20px;
+  color: rgb(228, 113, 113);
   cursor: pointer;
 }
-.user-profile-info-container > .info-name > .edit:hover {
+.user-profile-info-container > .editContainer > .true:hover {
+  margin: 0px;
+  font-size: 20px;
+  color: rgb(44, 93, 44) !important;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.user-profile-info-container > .editContainer > .false:hover {
+  margin: 0px;
+  font-size: 20px;
+  color: rgb(116, 58, 58) !important;
+  cursor: pointer;
+}
+.user-profile-info-container > .editContainer > .edit:hover {
   color: rgb(38, 38, 255);
 }
+.user-profile-info-container > .editContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .user-profile-info-container > p {
   margin: 15px;
 }
 .user-profile-info-container > .info-email {
   font-size: 25px;
+  background-color: rgb(241, 241, 241);
 }

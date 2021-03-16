@@ -23,7 +23,6 @@ const CreateMerchBody = () => {
 
   const handleOnChange = (e) => {
     setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
     setPreview(URL.createObjectURL(e.target.files[0]));
     setWidth(100);
     setHeight(100);

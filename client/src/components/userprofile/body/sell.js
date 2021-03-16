@@ -9,7 +9,7 @@ const UserProfileSell = ({ sellMerchs }) => {
       </div>
       <div className="merchs">
         {sellMerchs.map((merch) => (
-          <Merchs merch={merch} />
+          <Merchs key={merch.id} merch={merch} />
         ))}
       </div>
     </div>

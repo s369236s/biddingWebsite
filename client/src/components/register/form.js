@@ -24,6 +24,9 @@ const RegisterForm = () => {
     setDay("1");
     setYears(Array.from(new Array(year_ - 1900), (_, index) => year_ - index));
     setDays(Array.from(new Array(31), (_, index) => index + 1));
+    return () => {
+      console.log("cleaned up");
+    };
   }, []);
 
   let history = useHistory();
@@ -32,10 +35,10 @@ const RegisterForm = () => {
     history.push("./");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    Axios({
+    await Axios({
       method: "post",
       url: "http://localhost:5000/user/register",
       data: {

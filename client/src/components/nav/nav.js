@@ -16,8 +16,8 @@ const Nav = ({ setMerchs }) => {
   const overEvent = (e) => {
     setOver(true);
   };
-  useEffect(async () => {
-    await Axios({
+  useEffect(() => {
+    Axios({
       method: "GET",
       withCredentials: true,
       url: "http://localhost:5000/user/auth",
@@ -29,6 +29,7 @@ const Nav = ({ setMerchs }) => {
       }
       setUsername(res.data.username);
       setUserLink(res.data.usersNumber);
+      return () => {};
     });
   }, []);
   return (

@@ -7,6 +7,8 @@ import UserProfileBody from "../../components/userprofile/body/body";
 const UserProfilePage = ({ location }) => {
   const [info, setInfo] = useState({});
   const [sellMerchs, setSellMerchs] = useState([]);
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
 
   const query = qs.parse(location.search);
   useEffect(async () => {
@@ -26,7 +28,14 @@ const UserProfilePage = ({ location }) => {
   return (
     <div>
       <Nav />
-      <UserProfileBody info={info} sellMerchs={sellMerchs} />
+      <UserProfileBody
+        setUserName={setUserName}
+        setEmail={setEmail}
+        email={info.email}
+        username={info.username}
+        info={info}
+        sellMerchs={sellMerchs}
+      />
     </div>
   );
 };

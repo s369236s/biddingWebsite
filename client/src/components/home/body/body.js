@@ -8,6 +8,7 @@ const HomeBody = ({ merchs, setMerchs }) => {
   useEffect(async () => {
     const result = await Axios.get("http://localhost:5000/merch/getMerch");
     setMerchs(result.data);
+    return () => {};
   }, []);
 
   return (
