@@ -5,7 +5,7 @@ const UserProfileSell = ({ sellMerchs }) => {
   return (
     <div className="user-profile-sell-container">
       <div className="header">
-        <p>販賣物品</p>
+        <p>競標物品</p>
       </div>
       <div className="merchs">
         {sellMerchs.map((merch) => (

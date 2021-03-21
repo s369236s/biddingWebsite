@@ -9,6 +9,7 @@ const {
   getAMerch,
   addBidMoney,
   getUserSellMerch,
+  getUserBiddingMerch,
 } = require("../controllers/merch");
 
 router.post(
@@ -30,6 +31,10 @@ router.get("/getMerch", (req, res) => {
 
 router.get("/getUserSellMerch", (req, res) => {
   getUserSellMerch(req, res);
+});
+
+router.get("/getUserBiddingMerch", (req, res) => {
+  getUserBiddingMerch(req, res);
 });
 
 router.post("/getAMerch", (req, res) => {

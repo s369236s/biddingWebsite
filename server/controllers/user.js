@@ -87,7 +87,14 @@ module.exports = {
         res.send(userInfo);
       });
     } else {
-      res.send("error");
+      res.status(500).send("error");
+    }
+  },
+  grabUser: (req, res) => {
+    if (req.user !== undefined) {
+      res.status(200).send(req.user.id);
+    } else {
+      res.status(500).send("error");
     }
   },
 };

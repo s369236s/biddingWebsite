@@ -1,9 +1,16 @@
 import React from "react";
-
-const UserProfileBuy = () => {
+import Merchs from "./merchs";
+const UserProfileBuy = ({ biddingMerchs }) => {
   return (
-    <div>
-      <p>Buy</p>
+    <div className="user-profile-sell-container">
+      <div className="header">
+        <p>販賣物品</p>
+      </div>
+      <div className="merchs">
+        {biddingMerchs.map((merch) => (
+          <Merchs key={merch.id} merch={merch} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -34,6 +34,10 @@ const UserSchema = new Schema({
     type: Array,
     required: false,
   },
+  biddingMerchs: {
+    type: Array,
+    required: false,
+  },
 });
 
 const User = mongoose.model("User", UserSchema, "users");

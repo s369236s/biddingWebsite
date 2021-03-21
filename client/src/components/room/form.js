@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
-
+import Axios from "axios";
 import "./form.css";
 
 const RoomForm = ({ socket, room, price }) => {
   const [bidmoney, setBidmoney] = useState(0);
   const [showFlash, setShowFlash] = useState(false);
   const [flash, setFlash] = useState("");
+  const [uid, setUid] = useState("");
+  useEffect(() => {
+    Axios.get("http://localhost:5000/user/grabUser", {
+      withCredentials: true,
+    }).then((res) => {
+      setUid(res.data);
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit("send", { bidmoney, room });
+    socket.emit("send", { bidmoney, room, uid });
     setShowFlash(true);
   };
   useEffect(() => {

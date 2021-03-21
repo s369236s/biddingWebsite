@@ -10,6 +10,7 @@ const UserProfileBody = ({
   email,
   setEmail,
   setUserName,
+  biddingMerchs,
 }) => {
   return (
     <div className="user-profile-body-container">
@@ -20,7 +21,7 @@ const UserProfileBody = ({
         email={email}
         username={username}
       />
-      <UserProfileBuy />
+      <UserProfileBuy biddingMerchs={biddingMerchs} />
       <UserProfileSell sellMerchs={sellMerchs} />
     </div>
   );

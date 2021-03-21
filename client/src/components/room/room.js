@@ -3,8 +3,12 @@ import qs from "query-string";
 import io from "socket.io-client";
 import "./room.css";
 let socket;
-const ENDPOINT = "http://localhost:5000";
-socket = io(ENDPOINT);
+const ENDPOINT = "http://localhost:5000/Room";
+socket = io(ENDPOINT, { withCredentials: true });
+
+useEffect(() => {
+  axios;
+});
 
 const Room = ({ location }) => {
   const [value, setValue] = useState("");

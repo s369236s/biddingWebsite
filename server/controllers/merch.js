@@ -62,7 +62,7 @@ module.exports = {
         let merchs = [];
         for (const sellMerch of a.sellMerchs) {
           await Merch.find({ _id: sellMerch }, (err, merch) => {
-            if (err) throw err;
+            if (err) throw res.status(500).send(err);
             let [b] = merch;
             if (b) {
               merchs.push({
@@ -76,10 +76,37 @@ module.exports = {
         }
         res.status(201).send(merchs);
       });
+    } else {
+      res.status(500).send("not send");
     }
   },
-
-  addBidMoney: async (bidNumber, merchId) => {
+  getUserBiddingMerch: async (req, res) => {
+    if (req.user) {
+      await User.find({ _id: req.user.id }, async (err, datas) => {
+        if (err) throw err;
+        let [a] = datas;
+        let merchs = [];
+        for (const biddingMerch of a.biddingMerchs) {
+          await Merch.find({ _id: biddingMerch }, (err, merch) => {
+            if (err) throw res.status(500).send(err);
+            let [b] = merch;
+            if (b) {
+              merchs.push({
+                name: b.name,
+                price: b.price,
+                id: b._id,
+                photo: b.photo,
+              });
+            }
+          });
+        }
+        res.status(201).send(merchs);
+      });
+    } else {
+      res.status(500).send("not send");
+    }
+  },
+  addBidMoney: async (bidNumber, merchId, uid) => {
     // console.log(bidNumber);
     if (isNaN(bidNumber)) {
       return false;
@@ -105,6 +132,17 @@ module.exports = {
           { price: bidNumber },
           (err, docs) => {
             if (err) throw err;
+            console.log(docs);
+          }
+        );
+        await User.findByIdAndUpdate(
+          uid,
+          {
+            $addToSet: { biddingMerchs: merchId },
+          },
+          (err, _user) => {
+            if (err) throw err;
+            // console.log(_user);
           }
         );
         return true;

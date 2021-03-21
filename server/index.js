@@ -11,7 +11,7 @@ const io = require("socket.io")(server, {
     origin: "http://localhost:3000",
   },
 });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 const url = "mongodb://127.0.0.1:27017";
 
@@ -32,6 +32,32 @@ app.use(
 
 const { addBidMoney } = require("./controllers/merch");
 const Merch = require("./models/Merch");
+const wrap = (middleware) => (socket, next) => middleware(socket.req, {}, next);
+// io.use(
+//   wrap(
+//     session({
+//       secret: "nksnfoiehhrekwqnrlkje",
+//       resave: "false",
+//       saveUninitialized: "false",
+//     })
+//   )
+// );
+// io.use(wrap(passport.initialize()));
+// io.use(wrap(passport.session()));
+require("./config/passport")(passport);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "nksnfoiehhrekwqnrlkje",
+    resave: "false",
+    saveUninitialized: "false",
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
 io.on("connection", (socket) => {
   socket.on("join", async (roomId) => {
     socket.join(roomId);
@@ -42,10 +68,11 @@ io.on("connection", (socket) => {
     });
     io.sockets.to(roomId).emit("join-room-money", merchPrice);
     socket.on("send", (data) => {
+      console.log(data);
       const MerchId = data.room;
+      const uid = data.uid;
       const parseBidmoney = parseInt(data.bidmoney);
-      addBidMoney(parseBidmoney, MerchId).then((sucess) => {
-        console.log("su");
+      addBidMoney(parseBidmoney, MerchId, uid).then((sucess) => {
         let isUpdate = false;
         if (sucess) {
           isUpdate = true;
@@ -57,20 +84,6 @@ io.on("connection", (socket) => {
     });
   });
 });
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(
-  session({
-    secret: "nksnfoiehhrekwqnrlkje",
-    resave: "false",
-    saveUninitialized: "false",
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
-require("./config/passport")(passport);
 
 const userRouter = require("./routes/user");
 app.use("/user", userRouter);

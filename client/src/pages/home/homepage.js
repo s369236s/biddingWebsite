@@ -5,7 +5,6 @@ import Body from "../../components/home/body/body";
 import Footer from "../../components/home/footer/footer";
 
 const HomePage = () => {
-  const [text, setText] = useState("");
   const [merchs, setMerchs] = useState([]);
 
   return (

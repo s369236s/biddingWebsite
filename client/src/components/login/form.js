@@ -11,9 +11,9 @@ const LoginForm = () => {
   let value = 0;
   let history = useHistory();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await Axios({
+    Axios({
       method: "post",
       url: "http://localhost:5000/user/login",
       data: {

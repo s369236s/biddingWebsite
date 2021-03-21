@@ -1,14 +1,17 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Merchs from "../../merchs/merchs";
 import "./body.css";
 const HomeBody = ({ merchs, setMerchs }) => {
   // const [merchs, setMerchs] = useState([]);
-
+  const mountedRef = useRef(true);
   useEffect(async () => {
-    const result = await Axios.get("http://localhost:5000/merch/getMerch");
-    setMerchs(result.data);
-    return () => {};
+    await Axios.get("http://localhost:5000/merch/getMerch").then((res) => {
+      setMerchs(res.data);
+    });
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
   return (

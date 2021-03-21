@@ -6,6 +6,7 @@ const {
   postLogin,
   auth,
   getCheckUser,
+  grabUser,
 } = require("../controllers/user");
 
 router.post(
@@ -45,6 +46,10 @@ router.get("/auth", (req, res) => {
 
 router.get("/checkUser", (req, res) => {
   getCheckUser(req, res);
+});
+
+router.get("/grabUser", (req, res) => {
+  grabUser(req, res);
 });
 
 router.get("/logout", (req, res) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory, Link } from "react-router-dom";
 import NavSearch from "./search";
 import NavUser from "./navuser";
@@ -8,6 +8,7 @@ const Nav = ({ setMerchs }) => {
   let history = useHistory();
   const [username, setUsername] = useState("");
   const [userLink, setUserLink] = useState("");
+  const mountedRef = useRef(true);
 
   const [over, setOver] = useState(false);
   const leaveEvent = (e) => {
@@ -16,8 +17,8 @@ const Nav = ({ setMerchs }) => {
   const overEvent = (e) => {
     setOver(true);
   };
-  useEffect(() => {
-    Axios({
+  useEffect(async () => {
+    await Axios({
       method: "GET",
       withCredentials: true,
       url: "http://localhost:5000/user/auth",
@@ -29,8 +30,10 @@ const Nav = ({ setMerchs }) => {
       }
       setUsername(res.data.username);
       setUserLink(res.data.usersNumber);
-      return () => {};
     });
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
   return (
     <div className="nav-container">
