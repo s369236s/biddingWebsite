@@ -1,1 +1,4 @@
 # biddingWebsite
+```
+$ npm install
+```
