@@ -6,7 +6,6 @@ Install
 $ git clone https://github.com/s369236s/biddingWebsite.git
 
 $ npm install
-
 ```
 
 
@@ -17,5 +16,4 @@ $ npm start
 $ cd client
 
 $ npm start
-
 ```
